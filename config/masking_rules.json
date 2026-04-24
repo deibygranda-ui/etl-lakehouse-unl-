@@ -1,0 +1,25 @@
+{
+    "fields": {
+        "transaction_id": {
+            "type": "mask_transaction_id",
+            "params": {
+                "visible_digits": 4,
+                "mask_char": "*"
+            }
+        },
+        "user_id": {
+            "type": "hash_sha256",
+            "params": {
+                "salt": "UNL_2026"
+            }
+        },
+        "source_file": {
+            "type": "mask_text",
+            "params": {
+                "visible_digits": 3,
+                "mask_char": "*"
+            }
+        }
+    },
+    "default_action": "keep_original"
+}
