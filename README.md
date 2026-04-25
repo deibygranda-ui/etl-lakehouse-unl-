@@ -78,5 +78,3 @@ Se implementa **Exponential Backoff** en la ingesta de datos:
 
 ---
 
-## 📁 Estructura del Proyecto
-
