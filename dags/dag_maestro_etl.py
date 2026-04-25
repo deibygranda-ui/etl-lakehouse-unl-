@@ -151,6 +151,33 @@ def fetch_with_retry(
     }
 )
 def taller_etl_unl_wap():
+
+    def fetch_with_retry(url, headers, params, max_retries=5):
+        import time
+        import requests
+
+        for intento in range(max_retries):
+            try:
+                response = requests.get(url, headers=headers, params=params, timeout=10)
+
+                if response.status_code == 200:
+                    return response.json()
+
+                elif response.status_code in [429, 500]:
+                    wait_time = 2 ** intento
+                    logger.warning(f"Intento {intento+1}: Error {response.status_code}, reintentando en {wait_time}s...")
+                    time.sleep(wait_time)
+
+                else:
+                    response.raise_for_status()
+
+            except requests.exceptions.RequestException as e:
+                wait_time = 2 ** intento
+                logger.error(f"Error de red: {e}, reintentando en {wait_time}s...")
+                time.sleep(wait_time)
+
+        logger.error("Falló la extracción después de varios intentos")
+        return None
     
     # -------------------------------------------------------------------------
     # FASE 1: WRITE - Extracción y carga a esquema AUDIT

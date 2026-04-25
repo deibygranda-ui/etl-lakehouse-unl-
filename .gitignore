@@ -1,7 +1,10 @@
-.env
-data_lake/
-logs/
-plugins/
+# dbt
+dbt/proyecto_unl/target/
+dbt/proyecto_unl/dbt_packages/
+
+# Python
 __pycache__/
 *.pyc
-postgres_data/
+
+# Airflow logs
+logs/
